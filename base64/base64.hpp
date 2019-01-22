@@ -15,7 +15,6 @@ class base64
 {
 public:
 	constexpr static char pad = '=';
-	constexpr static char a[] = "";
 
 	enum class ALPHABET
 	{
