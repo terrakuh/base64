@@ -5,7 +5,9 @@
 
 void test(const std::string & _what, const std::string & _expected)
 {
-	std::cout << "base64(\"" << _what << "\") = " << _expected << ": " << (base64::encode(_what) == _expected) << '\n';
+	auto _actual = base64::encode(_what);
+
+	std::cout << "base64(\"" << _what << "\") = " << _expected << ": " << (_actual == _expected) << " | " << (base64::decode(_actual) == _what) << '\n';
 }
 
 int main()
