@@ -3,6 +3,10 @@ Simple, open source, header-only base64 encoder
 
 # Usage
 ```cpp
+#include <string>
+#include <iostream>
+#include "base64.hpp"
+
 std::string encoded = base64::encode("hello, world");
 
 std::cout << "encoded: " << encoded << std::endl
