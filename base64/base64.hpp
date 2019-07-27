@@ -65,6 +65,8 @@ public:
 			alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
 			break;
+		default:
+			throw base64_error("invalid alphabet");
 		}
 
 		result.resize((length / 3 + (length % 3 ? 1 : 0)) * 4);
@@ -113,12 +115,12 @@ private:
 	{
 		if (Count == 3) {
 			output[0] = alphabet[input[0] >> 2 & 0x3f];
-			output[1] = alphabet[(input[0] & 0x03) << 4 | input[1] >> 4 & 0x0f];
-			output[2] = alphabet[(input[1] & 0x0f) << 2 | input[2] >> 6 & 0x03];
+			output[1] = alphabet[((input[0] & 0x03) << 4) | (input[1] >> 4 & 0x0f)];
+			output[2] = alphabet[((input[1] & 0x0f) << 2) | (input[2] >> 6 & 0x03)];
 			output[3] = alphabet[input[2] & 0x3f];
 		} else if (Count == 2) {
 			output[0] = alphabet[input[0] >> 2 & 0x3f];
-			output[1] = alphabet[(input[0] & 0x03) << 4 | input[1] >> 4 & 0x0f];
+			output[1] = alphabet[((input[0] & 0x03) << 4) | (input[1] >> 4 & 0x0f)];
 			output[2] = alphabet[(input[1] & 0x0f) << 2];
 			output[3] = pad;
 		} else if (Count == 1) {
