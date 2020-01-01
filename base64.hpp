@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdio>
 #include <cstdint>
+#include <stdexcept>
 
 
 class base64_error : public std::runtime_error
@@ -16,19 +17,19 @@ class base64
 public:
 	constexpr static char pad = '=';
 
-	enum class ALPHABET
+	enum class alphabet
 	{
-		AUTO,
-		NORMAL,
-		URL_FILENAME_SAFE
+		auto_,
+		normal,
+		url_filename_safe
 	};
 
-	static void decode_inplace(std::string& str, ALPHABET alphabet = ALPHABET::AUTO)
+	static void decode_inplace(std::string& str, alphabet alphabet = alphabet::auto_)
 	{
 		str.resize(decode_inplace(&str[0], str.length(), alphabet));
 	}
 
-	static size_t decode_inplace(char* str, size_t length, ALPHABET alphapet = ALPHABET::AUTO)
+	static size_t decode_inplace(char* str, size_t length, alphabet alphapet = alphabet::auto_)
 	{
 		if (!length) {
 			return 0;
@@ -39,12 +40,12 @@ public:
 		return length / 4 * 3 - do_decode(str, length, str, alphapet);
 	}
 
-	static std::string encode(const std::string& str, ALPHABET alphabet = ALPHABET::NORMAL)
+	static std::string encode(const std::string& str, alphabet alphabet = alphabet::normal)
 	{
 		return encode(str.c_str(), str.length(), alphabet);
 	}
 
-	static std::string encode(const char* str, size_t length, ALPHABET alphabet = ALPHABET::NORMAL)
+	static std::string encode(const char* str, size_t length, alphabet alphabet = alphabet::normal)
 	{
 		if (!length) {
 			return "";
@@ -56,12 +57,12 @@ public:
 
 		// Set alphabet
 		switch (alphabet) {
-		case ALPHABET::AUTO:
-		case ALPHABET::NORMAL:
+		case alphabet::auto_:
+		case alphabet::normal:
 			alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 			break;
-		case ALPHABET::URL_FILENAME_SAFE:
+		case alphabet::url_filename_safe:
 			alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
 			break;
@@ -88,12 +89,12 @@ public:
 		return result;
 	}
 
-	static std::string decode(const std::string& str, ALPHABET alphabet = ALPHABET::AUTO)
+	static std::string decode(const std::string& str, alphabet alphabet = alphabet::auto_)
 	{
 		return decode(str.c_str(), str.length(), alphabet);
 	}
 
-	static std::string decode(const char* str, size_t length, ALPHABET alphabet = ALPHABET::AUTO)
+	static std::string decode(const char* str, size_t length, alphabet alphabet = alphabet::auto_)
 	{
 		if (!length) {
 			return "";
@@ -134,7 +135,7 @@ private:
 		output += 4;
 	}
 	template<int Count>
-	static void decode(ALPHABET& alphabet, const char*& input, char*& output)
+	static void decode(alphabet& alphabet, const char*& input, char*& output)
 	{
 		char tmp;
 
@@ -160,7 +161,7 @@ private:
 		input += 4;
 		output += 3 - Count;
 	}
-	static char base64_value(ALPHABET& alphabet, char c)
+	static char base64_value(alphabet& alphabet, char c)
 	{
 		if (c >= 'A' && c <= 'Z') {
 			return c - 'A';
@@ -171,13 +172,13 @@ private:
 		}
 
 		// Comes down to alphabet
-		if (alphabet == ALPHABET::NORMAL) {
+		if (alphabet == alphabet::normal) {
 			if (c == '+') {
 				return 62;
 			} else if (c == '/') {
 				return 63;
 			}
-		} else if (alphabet == ALPHABET::URL_FILENAME_SAFE) {
+		} else if (alphabet == alphabet::url_filename_safe) {
 			if (c == '-') {
 				return 62;
 			} else if (c == '_') {
@@ -185,19 +186,19 @@ private:
 			}
 		} else {
 			if (c == '+') {
-				alphabet = ALPHABET::NORMAL;
+				alphabet = alphabet::normal;
 
 				return 62;
 			} else if (c == '/') {
-				alphabet = ALPHABET::NORMAL;
+				alphabet = alphabet::normal;
 
 				return 63;
 			} else if (c == '-') {
-				alphabet = ALPHABET::URL_FILENAME_SAFE;
+				alphabet = alphabet::url_filename_safe;
 
 				return 62;
 			} else if (c == '_') {
-				alphabet = ALPHABET::URL_FILENAME_SAFE;
+				alphabet = alphabet::url_filename_safe;
 
 				return 63;
 			}
@@ -206,7 +207,7 @@ private:
 		throw base64_error("invalid base64 character.");
 	}
 
-	static size_t do_decode(const char* input, size_t length, char* output, ALPHABET alphabet)
+	static size_t do_decode(const char* input, size_t length, char* output, alphabet alphabet)
 	{
 		const auto end = input + length - 4;
 
