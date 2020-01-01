@@ -39,56 +39,122 @@ public:
 
 		return length / 4 * 3 - do_decode(str, length, str, alphapet);
 	}
+	/**
+	 Encodes all the elements from `in_begin` to `in_end` to `out`.
 
+	 @warning The source and destination cannot overlap. The destination must be able to hold at least `required_encode_size(std::distance(in_begin, in_end))`, otherwise the behavior depends on the output iterator.
+
+	 @tparam Input_iterator the source; the returned elements are cast to `std::uint8_t` and should not be greater than 8 bits
+	 @tparam Output_iterator the destination; the elements written to it are from the type `char`
+	 @param in_begin the beginning of the source
+	 @param in_end the ending of the source
+	 @param out the destination iterator
+	 @param alphabet which alphabet should be used
+	 @returns the iterator to the next element past the last element copied
+	 @throws see `Input_iterator` and `Output_iterator`
+	*/
+	template<typename Input_iterator, typename Output_iterator>
+	static Output_iterator encode(Input_iterator in_begin, Input_iterator in_end, Output_iterator out,
+	                              alphabet alphabet = alphabet::normal)
+	{
+		constexpr auto pad = '=';
+		const char* alpha  = alphabet == alphabet::url_filename_safe
+		                        ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+		                        : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+		while (in_begin != in_end) {
+			std::uint8_t i0 = 0, i1 = 0, i2 = 0;
+
+			// first character
+			i0 = static_cast<std::uint8_t>(*in_begin);
+			++in_begin;
+
+			*out = alpha[i0 >> 2 & 0x3f];
+			++out;
+
+			// part of first character and second
+			if (in_begin != in_end) {
+				i1 = static_cast<std::uint8_t>(*in_begin);
+				++in_begin;
+
+				*out = alpha[((i0 & 0x3) << 4) | (i1 >> 4 & 0x0f)];
+				++out;
+			} else {
+				*out = alpha[(i0 & 0x3) << 4];
+				++out;
+
+				// last padding
+				*out = pad;
+				++out;
+
+				// last padding
+				*out = pad;
+				++out;
+
+				break;
+			}
+
+			// part of second character and third
+			if (in_begin != in_end) {
+				i2 = static_cast<std::uint8_t>(*in_begin);
+				++in_begin;
+
+				*out = alpha[((i1 & 0xf) << 2) | (i2 >> 6 & 0x03)];
+				++out;
+			} else {
+				*out = alpha[(i1 & 0xf) << 2];
+				++out;
+
+				// last padding
+				*out = pad;
+				++out;
+
+				break;
+			}
+
+			// rest of third
+			*out = alpha[i2 & 0x3f];
+			++out;
+		}
+
+		return out;
+	}
+	/**
+	 Encodes a string.
+
+	 @param str the string that should be encoded
+	 @param alphabet which alphabet should be used
+	 @returns the encoded base64 string
+	 @throws see base64::encode()
+	*/
 	static std::string encode(const std::string& str, alphabet alphabet = alphabet::normal)
 	{
-		return encode(str.c_str(), str.length(), alphabet);
-	}
-
-	static std::string encode(const char* str, size_t length, alphabet alphabet = alphabet::normal)
-	{
-		if (!length) {
-			return "";
-		}
-
 		std::string result;
-		const char* alpha = nullptr;
-		const auto end = str + length;
 
-		// Set alphabet
-		switch (alphabet) {
-		case alphabet::auto_:
-		case alphabet::normal:
-			alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+		result.reserve(required_encode_size(str.length()) + 1);
 
-			break;
-		case alphabet::url_filename_safe:
-			alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-
-			break;
-		default:
-			throw base64_error("invalid alphabet");
-		}
-
-		result.resize((length / 3 + (length % 3 ? 1 : 0)) * 4);
-
-		auto out = &result[0];
-
-		// Encode 3 bytes
-		while (str + 3 <= end) {
-			encode<3>(alpha, str, out);
-		}
-
-		// Encode last bit
-		if (end - str == 1) {
-			encode<1>(alpha, str, out);
-		} else if (end - str == 2) {
-			encode<2>(alpha, str, out);
-		}
+		encode(str.begin(), str.end(), std::back_inserter(result), alphabet);
 
 		return result;
 	}
+	/**
+	 Encodes a char array.
 
+	 @param str the char array
+	 @param length the length of the array
+	 @param alphabet which alphabet should be used
+	 @returns the encoded string
+	*/
+	static std::string encode(const char* str, size_t length, alphabet alphabet = alphabet::normal)
+	{
+		std::string result;
+
+		result.reserve(required_encode_size(length) + 1);
+
+		encode(str, str + length, std::back_inserter(result), alphabet);
+
+		return result;
+	}
 	static std::string decode(const std::string& str, alphabet alphabet = alphabet::auto_)
 	{
 		return decode(str.c_str(), str.length(), alphabet);
@@ -109,31 +175,12 @@ public:
 
 		return result;
 	}
+	static std::size_t required_encode_size(std::size_t length) noexcept
+	{
+		return (length / 3 + (length % 3 ? 1 : 0)) * 4;
+	}
 
 private:
-	template<int Count>
-	static void encode(const char* alphabet, const char*& input, char*& output)
-	{
-		if (Count == 3) {
-			output[0] = alphabet[input[0] >> 2 & 0x3f];
-			output[1] = alphabet[((input[0] & 0x03) << 4) | (input[1] >> 4 & 0x0f)];
-			output[2] = alphabet[((input[1] & 0x0f) << 2) | (input[2] >> 6 & 0x03)];
-			output[3] = alphabet[input[2] & 0x3f];
-		} else if (Count == 2) {
-			output[0] = alphabet[input[0] >> 2 & 0x3f];
-			output[1] = alphabet[((input[0] & 0x03) << 4) | (input[1] >> 4 & 0x0f)];
-			output[2] = alphabet[(input[1] & 0x0f) << 2];
-			output[3] = pad;
-		} else if (Count == 1) {
-			output[0] = alphabet[input[0] >> 2 & 0x3f];
-			output[1] = alphabet[(input[0] & 0x03) << 4];
-			output[2] = pad;
-			output[3] = pad;
-		}
-
-		input += Count;
-		output += 4;
-	}
 	template<int Count>
 	static void decode(alphabet& alphabet, const char*& input, char*& output)
 	{
