@@ -1,0 +1,1183 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>base64 - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,400,400i,700%7CPT+Mono&display=fallback">
+        <style>body,input{font-family:"PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"PT Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#base64" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="." title="Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                base64
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="." title="Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        base64
+      </label>
+    
+    <a href="classbase64.html" title="base64" class="md-nav__link md-nav__link--active">
+      base64
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#public-functions" class="md-nav__link">
+    Public Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-static-functions" class="md-nav__link">
+    Public Static Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output_iterator-encode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetnormal" class="md-nav__link">
+    Output_iterator encode (Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::normal)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-parameters" class="md-nav__link">
+    Template Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-encode-const-stdstring-str-alphabet-alphabetalphabetstandard" class="md-nav__link">
+    std::string encode (const std::string &amp;str, alphabet alphabet=alphabet::standard)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_1" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-encode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetstandard" class="md-nav__link">
+    std::string encode (const char buffer, std::size_t size, alphabet alphabet=alphabet::standard)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_2" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_iterator-decode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    Output_iterator decode (Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-parameters_1" class="md-nav__link">
+    Template Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_3" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_2" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-decode-const-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    std::string decode (const std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_4" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_3" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-decode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    std::string decode (const char buffer, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_5" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_4" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-decode_inplace-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    void decode_inplace (std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_5" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#char-decode_inplace-char-str-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    char * decode_inplace (char str, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_6" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_6" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdsize_t-max_decode_size-stdsize_t-size-noexcept" class="md-nav__link">
+    std::size_t max_decode_size (std::size_t size) noexcept
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_7" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdsize_t-required_encode_size-stdsize_t-size-noexcept" class="md-nav__link">
+    std::size_t required_encode_size (std::size_t size) noexcept
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_8" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="classbase64__error.html" title="base64_error" class="md-nav__link">
+      base64_error
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#public-functions" class="md-nav__link">
+    Public Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-static-functions" class="md-nav__link">
+    Public Static Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output_iterator-encode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetnormal" class="md-nav__link">
+    Output_iterator encode (Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::normal)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-parameters" class="md-nav__link">
+    Template Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-encode-const-stdstring-str-alphabet-alphabetalphabetstandard" class="md-nav__link">
+    std::string encode (const std::string &amp;str, alphabet alphabet=alphabet::standard)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_1" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-encode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetstandard" class="md-nav__link">
+    std::string encode (const char buffer, std::size_t size, alphabet alphabet=alphabet::standard)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_2" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_iterator-decode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    Output_iterator decode (Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-parameters_1" class="md-nav__link">
+    Template Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_3" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_2" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-decode-const-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    std::string decode (const std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_4" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_3" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdstring-decode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    std::string decode (const char buffer, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_5" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_4" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-decode_inplace-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    void decode_inplace (std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_5" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#char-decode_inplace-char-str-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate" class="md-nav__link">
+    char * decode_inplace (char str, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_6" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions_6" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdsize_t-max_decode_size-stdsize_t-size-noexcept" class="md-nav__link">
+    std::size_t max_decode_size (std::size_t size) noexcept
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_7" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdsize_t-required_encode_size-stdsize_t-size-noexcept" class="md-nav__link">
+    std::size_t required_encode_size (std::size_t size) noexcept
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_8" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="base64">base64</h1>
+<h2 id="public-functions">Public Functions</h2>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<p><a name="classbase64_1a44280b180636a07f9e966df564326531"></a></p>
+<hr />
+<h3 id="output_iterator-encode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetnormal">Output_iterator <strong>encode</strong> <em>(Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::normal)</em></h3>
+<p>Encodes all the elements from <code>in_begin</code> to <code>in_end</code> to <code>out</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The source and destination cannot overlap. The destination must be able to hold at least <code>required_encode_size(std::distance(in_begin, in_end))</code>, otherwise the behavior depends on the output iterator.</p>
+</div>
+<h4 id="template-parameters">Template Parameters</h4>
+<ul>
+<li><em>Input_iterator</em> - the source; the returned elements are cast to <code>std::uint8_t</code> and should not be greater than 8 bits</li>
+<li><em>Output_iterator</em> - the destination; the elements written to it are from the type <code>char</code></li>
+</ul>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><em>in_begin</em> - the beginning of the source</li>
+<li><em>in_end</em> - the ending of the source</li>
+<li><em>out</em> - the destination iterator</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the iterator to the next element past the last element copied</p>
+<h4 id="exceptions">Exceptions</h4>
+<ul>
+<li><em>see</em> - <code>Input_iterator</code> and <code>Output_iterator</code></li>
+</ul>
+<p><a name="classbase64_1a93b0627c207ea3fbe0f0ca5ec2bad4c5"></a></p>
+<hr />
+<h3 id="stdstring-encode-const-stdstring-str-alphabet-alphabetalphabetstandard">std::string <strong>encode</strong> <em>(const std::string &amp;str, alphabet alphabet=alphabet::standard)</em></h3>
+<p>Encodes a string.</p>
+<h4 id="parameters_1">Parameters</h4>
+<ul>
+<li><em>str</em> - the string that should be encoded</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+</ul>
+<h4 id="returns_1">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the encoded <a href="classbase64.html">base64</a> string</p>
+<h4 id="exceptions_1">Exceptions</h4>
+<ul>
+<li><em>see</em> - <a href="#classbase64_1a44280b180636a07f9e966df564326531">base64::encode()</a></li>
+</ul>
+<p><a name="classbase64_1a202e8b69111f6dbff6c8e0fc491ec277"></a></p>
+<hr />
+<h3 id="stdstring-encode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetstandard">std::string <strong>encode</strong> <em>(const char </em>buffer, std::size_t size, alphabet alphabet=alphabet::standard)*</h3>
+<p>Encodes a char array.</p>
+<h4 id="parameters_2">Parameters</h4>
+<ul>
+<li><em>buffer</em> - the char array</li>
+<li><em>size</em> - the size of the array</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+</ul>
+<h4 id="returns_2">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the encoded string</p>
+<p><a name="classbase64_1a6d41446db8cb072e42766e10227bc6d5"></a></p>
+<hr />
+<h3 id="output_iterator-decode-input_iterator-in_begin-input_iterator-in_end-output_iterator-out-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate">Output_iterator <strong>decode</strong> <em>(Input_iterator in_begin, Input_iterator in_end, Output_iterator out, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)</em></h3>
+<p>Decodes all the elements from <code>in_begin</code> to <code>in_end</code> to <code>out</code>. <code>in_begin</code> may point to the same location as <code>out</code>, in other words: inplace decoding is possible.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The destination must be able to hold at least <code>required_decode_size(std::distance(in_begin, in_end))</code>, otherwise the behavior depends on the output iterator.</p>
+</div>
+<h4 id="template-parameters_1">Template Parameters</h4>
+<ul>
+<li><em>Input_iterator</em> - the source; the returned elements are cast to <code>char</code></li>
+<li><em>Output_iterator</em> - the destination; the elements written to it are from the type <code>std::uint8_t</code></li>
+</ul>
+<h4 id="parameters_3">Parameters</h4>
+<ul>
+<li><em>in_begin</em> - the beginning of the source</li>
+<li><em>in_end</em> - the ending of the source</li>
+<li><em>out</em> - the destination iterator</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+<li><em>behavior</em> - the behavior when an error was detected</li>
+</ul>
+<h4 id="returns_3">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the iterator to the next element past the last element copied</p>
+<h4 id="exceptions_2">Exceptions</h4>
+<ul>
+<li><em><a href="classbase64__error.html">base64_error</a></em> - depending on the set behavior</li>
+<li><em>see</em> - <code>Input_iterator</code> and <code>Output_iterator</code></li>
+</ul>
+<p><a name="classbase64_1a27acbbf5a76c5f7f5975dd075eb28fa9"></a></p>
+<hr />
+<h3 id="stdstring-decode-const-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate">std::string <strong>decode</strong> <em>(const std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)</em></h3>
+<p>Decodes a string.</p>
+<h4 id="parameters_4">Parameters</h4>
+<ul>
+<li><em>str</em> - the <a href="classbase64.html">base64</a> encoded string</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+<li><em>behavior</em> - the behavior when an error was detected</li>
+</ul>
+<h4 id="returns_4">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the decoded string</p>
+<h4 id="exceptions_3">Exceptions</h4>
+<ul>
+<li><em>see</em> - <a href="#classbase64_1a6d41446db8cb072e42766e10227bc6d5">base64::decode()</a></li>
+</ul>
+<p><a name="classbase64_1a4b760bda89ee467de246f52984d1b4c9"></a></p>
+<hr />
+<h3 id="stdstring-decode-const-char-buffer-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate">std::string <strong>decode</strong> <em>(const char </em>buffer, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*</h3>
+<p>Decodes a string.</p>
+<h4 id="parameters_5">Parameters</h4>
+<ul>
+<li><em>buffer</em> - the <a href="classbase64.html">base64</a> encoded buffer</li>
+<li><em>size</em> - the size of the buffer</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+<li><em>behavior</em> - the behavior when an error was detected</li>
+</ul>
+<h4 id="returns_5">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the decoded string</p>
+<h4 id="exceptions_4">Exceptions</h4>
+<ul>
+<li><em>see</em> - <a href="#classbase64_1a6d41446db8cb072e42766e10227bc6d5">base64::decode()</a></li>
+</ul>
+<p><a name="classbase64_1a68310da863bf9d64b5e2003037c61821"></a></p>
+<hr />
+<h3 id="void-decode_inplace-stdstring-str-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate">void <strong>decode_inplace</strong> <em>(std::string &amp;str, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)</em></h3>
+<p>Decodes a string inplace.</p>
+<h4 id="parameters_6">Parameters</h4>
+<ul>
+<li><em>str</em> - the <a href="classbase64.html">base64</a> encoded string</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+<li><em>behavior</em> - the behavior when an error was detected</li>
+</ul>
+<h4 id="exceptions_5">Exceptions</h4>
+<ul>
+<li><em><a href="#classbase64_1a68310da863bf9d64b5e2003037c61821">base64::decode_inplace()</a></em> - </li>
+</ul>
+<p><a name="classbase64_1a9ffaf99b14d2075c84167ff47698535f"></a></p>
+<hr />
+<h3 id="char-decode_inplace-char-str-stdsize_t-size-alphabet-alphabetalphabetauto_-decoding_behavior-behaviordecoding_behaviormoderate">char * <strong>decode_inplace</strong> <em>(char </em>str, std::size_t size, alphabet alphabet=alphabet::auto_, decoding_behavior behavior=decoding_behavior::moderate)*</h3>
+<p>Decodes a char array inplace.</p>
+<h4 id="parameters_7">Parameters</h4>
+<ul>
+<li><em>str</em> - the string array</li>
+<li><em>size</em> - the length of the array</li>
+<li><em>alphabet</em> - which alphabet should be used</li>
+<li><em>behavior</em> - the behavior when an error was detected</li>
+</ul>
+<h4 id="returns_6">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the pointer to the next element past the last element decoded</p>
+<h4 id="exceptions_6">Exceptions</h4>
+<ul>
+<li><em><a href="#classbase64_1a68310da863bf9d64b5e2003037c61821">base64::decode_inplace()</a></em> - </li>
+</ul>
+<p><a name="classbase64_1aebfb48a4ff13cb6445128e9cf8d53acf"></a></p>
+<hr />
+<h3 id="stdsize_t-max_decode_size-stdsize_t-size-noexcept">std::size_t <strong>max_decode_size</strong> <em>(std::size_t size) noexcept</em></h3>
+<p>Returns the required decoding size for a given size. The value is calculated with the following formula:
+$$ \lceil \frac{size}{4} \rceil \cdot 3 $$</p>
+<h4 id="parameters_8">Parameters</h4>
+<ul>
+<li><em>size</em> - the size of the encoded input</li>
+</ul>
+<h4 id="returns_7">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the size of the resulting decoded buffer; this the absolute maximum</p>
+<p><a name="classbase64_1abce7827e63f92990b24805a6e0b315e4"></a></p>
+<hr />
+<h3 id="stdsize_t-required_encode_size-stdsize_t-size-noexcept">std::size_t <strong>required_encode_size</strong> <em>(std::size_t size) noexcept</em></h3>
+<p>Returns the required encoding size for a given size. The value is calculated with the following formula:
+$$ \lceil \frac{size}{3} \rceil \cdot 4 $$</p>
+<h4 id="parameters_9">Parameters</h4>
+<ul>
+<li><em>size</em> - the size of the decoded input</li>
+</ul>
+<h4 id="returns_8">Returns</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;the size of the resulting encoded buffer</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="classbase64__error.html" title="base64_error" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                base64_error
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      
+    
+  </body>
+</html>
