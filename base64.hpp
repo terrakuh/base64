@@ -78,7 +78,7 @@ public:
 	*/
 	template<typename Input_iterator, typename Output_iterator>
 	static Output_iterator encode(Input_iterator in_begin, Input_iterator in_end, Output_iterator out,
-	                              alphabet alphabet = alphabet::normal)
+	                              alphabet alphabet = alphabet::standard)
 	{
 		constexpr auto pad = '=';
 		const char* alpha  = alphabet == alphabet::url_filename_safe
