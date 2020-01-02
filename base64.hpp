@@ -1,10 +1,9 @@
 #pragma once
 
-#include <string>
-#include <cstdio>
 #include <cstdint>
+#include <iterator>
 #include <stdexcept>
-
+#include <string>
 
 class base64_error : public std::runtime_error
 {
@@ -15,6 +14,7 @@ public:
 class base64
 {
 public:
+	/** the padding character */
 	constexpr static char pad = '=';
 
 	enum class alphabet
@@ -24,27 +24,20 @@ public:
 		url_filename_safe
 	};
 
-	static void decode_inplace(std::string& str, alphabet alphabet = alphabet::auto_)
+	enum class decoding_behavior
 	{
-		str.resize(decode_inplace(&str[0], str.length(), alphabet));
-	}
+		strict,
+		moderate
+	};
 
-	static size_t decode_inplace(char* str, size_t length, alphabet alphapet = alphabet::auto_)
-	{
-		if (!length) {
-			return 0;
-		} else if (length % 4) {
-			throw base64_error("invalid base64 input.");
-		}
-
-		return length / 4 * 3 - do_decode(str, length, str, alphapet);
-	}
 	/**
 	 Encodes all the elements from `in_begin` to `in_end` to `out`.
 
-	 @warning The source and destination cannot overlap. The destination must be able to hold at least `required_encode_size(std::distance(in_begin, in_end))`, otherwise the behavior depends on the output iterator.
+	 @warning The source and destination cannot overlap. The destination must be able to hold at least
+	 `required_encode_size(std::distance(in_begin, in_end))`, otherwise the behavior depends on the output iterator.
 
-	 @tparam Input_iterator the source; the returned elements are cast to `std::uint8_t` and should not be greater than 8 bits
+	 @tparam Input_iterator the source; the returned elements are cast to `std::uint8_t` and should not be greater than
+	 8 bits
 	 @tparam Output_iterator the destination; the elements written to it are from the type `char`
 	 @param in_begin the beginning of the source
 	 @param in_end the ending of the source
@@ -140,75 +133,173 @@ public:
 	/**
 	 Encodes a char array.
 
-	 @param str the char array
-	 @param length the length of the array
+	 @param buffer the char array
+	 @param size the size of the array
 	 @param alphabet which alphabet should be used
 	 @returns the encoded string
 	*/
-	static std::string encode(const char* str, size_t length, alphabet alphabet = alphabet::normal)
+	static std::string encode(const char* buffer, std::size_t size, alphabet alphabet = alphabet::normal)
 	{
 		std::string result;
 
-		result.reserve(required_encode_size(length) + 1);
+		result.reserve(required_encode_size(size) + 1);
 
-		encode(str, str + length, std::back_inserter(result), alphabet);
+		encode(buffer, buffer + size, std::back_inserter(result), alphabet);
 
 		return result;
 	}
-	static std::string decode(const std::string& str, alphabet alphabet = alphabet::auto_)
-	{
-		return decode(str.c_str(), str.length(), alphabet);
-	}
+	/**
+	 Decodes all the elements from `in_begin` to `in_end` to `out`. `in_begin` may point to the same location as `out`,
+	 in other words: inplace decoding is possible.
 
-	static std::string decode(const char* str, size_t length, alphabet alphabet = alphabet::auto_)
+	 @warning The destination must be able to hold at least `required_decode_size(std::distance(in_begin, in_end))`,
+	 otherwise the behavior depends on the output iterator.
+
+	 @tparam Input_iterator the source; the returned elements are cast to `char`
+	 @tparam Output_iterator the destination; the elements written to it are from the type `std::uint8_t`
+	 @param in_begin the beginning of the source
+	 @param in_end the ending of the source
+	 @param out the destination iterator
+	 @param alphabet which alphabet should be used
+	 @param behavior the behavior when an error was detected
+	 @returns the iterator to the next element past the last element copied
+	 @throws base64_error depending on the set behavior
+	 @throws see `Input_iterator` and `Output_iterator`
+	*/
+	template<typename Input_iterator, typename Output_iterator>
+	static Output_iterator decode(Input_iterator in_begin, Input_iterator in_end, Output_iterator out,
+	                              alphabet alphabet          = alphabet::auto_,
+	                              decoding_behavior behavior = decoding_behavior::moderate)
 	{
-		if (!length) {
-			return "";
-		} else if (length % 4) {
-			throw base64_error("invalid base64 input.");
+		constexpr auto pad = '=';
+		std::uint8_t last  = 0;
+		auto bits          = 0;
+
+		while (in_begin != in_end) {
+			auto c = *in_begin;
+			++in_begin;
+
+			if (c == '=') {
+				break;
+			}
+
+			auto part = _base64_value(alphabet, c);
+
+			// enough bits for one byte
+			if (bits + 6 >= 8) {
+				*out = (last << (8 - bits)) | (part >> bits - 2);
+				++out;
+
+				bits -= 2;
+			} else {
+				bits += 6;
+			}
+
+			last = part;
 		}
 
+		return out;
+	}
+	/**
+	 Decodes a string.
+
+	 @param str the base64 encoded string
+	 @param alphabet which alphabet should be used
+	 @param behavior the behavior when an error was detected
+	 @returns the decoded string
+	 @throws see base64::decode()
+	*/
+	static std::string decode(const std::string& str, alphabet alphabet = alphabet::auto_,
+	                          decoding_behavior behavior = decoding_behavior::moderate)
+	{
 		std::string result;
 
-		result.resize(length / 4 * 3);
-		result.resize(result.length() - do_decode(str, length, &result[0], alphabet));
+		result.reserve(max_decode_size(str.length()));
+
+		decode(str.begin(), str.end(), std::back_inserter(result), alphabet, behavior);
 
 		return result;
 	}
-	static std::size_t required_encode_size(std::size_t length) noexcept
+	/**
+	 Decodes a string.
+
+	 @param buffer the base64 encoded buffer
+	 @param size the size of the buffer
+	 @param alphabet which alphabet should be used
+	 @param behavior the behavior when an error was detected
+	 @returns the decoded string
+	 @throws see base64::decode()
+	*/
+	static std::string decode(const char* buffer, std::size_t size, alphabet alphabet = alphabet::auto_,
+	                          decoding_behavior behavior = decoding_behavior::moderate)
 	{
-		return (length / 3 + (length % 3 ? 1 : 0)) * 4;
+		std::string result;
+
+		result.reserve(max_decode_size(size));
+
+		decode(buffer, buffer + size, std::back_inserter(result), alphabet, behavior);
+
+		return result;
+	}
+	/**
+	 Decodes a string inplace.
+
+	 @param[in,out] str the base64 encoded string
+	 @param alphabet which alphabet should be used
+	 @param behavior the behavior when an error was detected
+	 @throws base64::decode_inplace()
+	*/
+	static void decode_inplace(std::string& str, alphabet alphabet = alphabet::auto_,
+	                           decoding_behavior behavior = decoding_behavior::moderate)
+	{
+		str.resize(decode(str.begin(), str.end(), str.begin(), alphabet, behavior) - str.begin());
+	}
+	/**
+	 Decodes a char array inplace.
+
+	 @param[in,out] str the string array
+	 @param size the length of the array
+	 @param alphabet which alphabet should be used
+	 @param behavior the behavior when an error was detected
+	 @returns the pointer to the next element past the last element decoded
+	 @throws base64::decode_inplace()
+	*/
+	static char* decode_inplace(char* str, std::size_t size, alphabet alphabet = alphabet::auto_,
+	                            decoding_behavior behavior = decoding_behavior::moderate)
+	{
+		return decode(str, str + size, str, alphabet, behavior);
+	}
+	/**
+	 Returns the required decoding size for a given size. The value is calculated with the following formula:
+
+	 $$
+	 \lceil \frac{size}{4} \rceil \cdot 3
+	 $$
+
+	 @param size the size of the encoded input
+	 @returns the size of the resulting decoded buffer; this the absolute maximum
+	*/
+	static std::size_t max_decode_size(std::size_t size) noexcept
+	{
+		return (size / 4 + (size % 4 ? 1 : 0)) * 3;
+	}
+	/**
+	 Returns the required encoding size for a given size. The value is calculated with the following formula:
+
+	 $$
+	 \lceil \frac{size}{3} \rceil \cdot 4
+	 $$
+
+	 @param size the size of the decoded input
+	 @returns the size of the resulting encoded buffer
+	*/
+	static std::size_t required_encode_size(std::size_t size) noexcept
+	{
+		return (size / 3 + (size % 3 ? 1 : 0)) * 4;
 	}
 
 private:
-	template<int Count>
-	static void decode(alphabet& alphabet, const char*& input, char*& output)
-	{
-		char tmp;
-
-		output[0] = base64_value(alphabet, input[0]) << 2;
-
-		tmp = base64_value(alphabet, input[1]);
-
-		output[0] |= tmp >> 4;
-
-		if (Count < 2) {
-			output[1] = (tmp & 0x0f) << 4;
-
-			tmp = base64_value(alphabet, input[2]);
-
-			output[1] |= tmp >> 2;
-
-			if (Count < 1) {
-				output[2] = (tmp & 0x03) << 6;
-				output[2] |= base64_value(alphabet, input[3]);
-			}
-		}
-
-		input += 4;
-		output += 3 - Count;
-	}
-	static char base64_value(alphabet& alphabet, char c)
+	static std::uint8_t _base64_value(alphabet& alphabet, char c)
 	{
 		if (c >= 'A' && c <= 'Z') {
 			return c - 'A';
@@ -252,32 +343,5 @@ private:
 		}
 
 		throw base64_error("invalid base64 character.");
-	}
-
-	static size_t do_decode(const char* input, size_t length, char* output, alphabet alphabet)
-	{
-		const auto end = input + length - 4;
-
-		// Decode 4 bytes
-		while (input + 4 <= end) {
-			decode<0>(alphabet, input, output);
-		}
-
-		// Decode last 4 bytes
-		if (input[3] == pad) {
-			if (input[2] == pad) {
-				decode<2>(alphabet, input, output);
-
-				return 2;
-			}
-
-			decode<1>(alphabet, input, output);
-
-			return 1;
-		}
-
-		decode<0>(alphabet, input, output);
-
-		return 0;
 	}
 };
