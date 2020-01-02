@@ -1,4 +1,32 @@
-#pragma once
+/*
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org>
+*/
+
+#ifndef PUBLIC_DOMAIN_BASE64_HPP_
+#define PUBLIC_DOMAIN_BASE64_HPP_
 
 #include <cstdint>
 #include <iterator>
@@ -19,14 +47,19 @@ public:
 
 	enum class alphabet
 	{
+		/** the alphabet is detected automatically */
 		auto_,
-		normal,
+		/** the standard base64 alphabet is used */
+		standard,
+		/** like `standard` except that the characters `+` and `/` are replaced by `-` and `_` respectively*/
 		url_filename_safe
 	};
 
 	enum class decoding_behavior
 	{
+		/** the input must be well padded; no bits are ignored */
 		strict,
+		/** if the input is not padded, the remaining bits are ignored */
 		moderate
 	};
 
@@ -120,7 +153,7 @@ public:
 	 @returns the encoded base64 string
 	 @throws see base64::encode()
 	*/
-	static std::string encode(const std::string& str, alphabet alphabet = alphabet::normal)
+	static std::string encode(const std::string& str, alphabet alphabet = alphabet::standard)
 	{
 		std::string result;
 
@@ -138,7 +171,7 @@ public:
 	 @param alphabet which alphabet should be used
 	 @returns the encoded string
 	*/
-	static std::string encode(const char* buffer, std::size_t size, alphabet alphabet = alphabet::normal)
+	static std::string encode(const char* buffer, std::size_t size, alphabet alphabet = alphabet::standard)
 	{
 		std::string result;
 
@@ -309,8 +342,8 @@ private:
 			return c - '0' + 52;
 		}
 
-		// Comes down to alphabet
-		if (alphabet == alphabet::normal) {
+		// comes down to alphabet
+		if (alphabet == alphabet::standard) {
 			if (c == '+') {
 				return 62;
 			} else if (c == '/') {
@@ -322,13 +355,14 @@ private:
 			} else if (c == '_') {
 				return 63;
 			}
-		} else {
+		} // auto detect
+		else {
 			if (c == '+') {
-				alphabet = alphabet::normal;
+				alphabet = alphabet::standard;
 
 				return 62;
 			} else if (c == '/') {
-				alphabet = alphabet::normal;
+				alphabet = alphabet::standard;
 
 				return 63;
 			} else if (c == '-') {
@@ -345,3 +379,5 @@ private:
 		throw base64_error("invalid base64 character.");
 	}
 };
+
+#endif // !PUBLIC_DOMAIN_BASE64_HPP_
