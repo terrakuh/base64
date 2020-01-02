@@ -42,9 +42,6 @@ public:
 class base64
 {
 public:
-	/** the padding character */
-	constexpr static char pad = '=';
-
 	enum class alphabet
 	{
 		/** the alphabet is detected automatically */
