@@ -1,7 +1,8 @@
 # base64
+
 Simple, open source, header-only base64 encoder
 
-# Usage
+## Usage
 ```cpp
 #include <string>
 #include <iostream>
@@ -22,5 +23,9 @@ base64::decode(encoded.begin(), encoded.end(), std::ostream_iterator<char>(std::
 
 ```
 
-# License
+## Documentation
+
+The documenation of the simple API can be found [here](https://terrakuh.github.io/base64/classbase64.html).
+
+## License
 The header file is put into the public domain, so everyone is allowed to do whatever they want.
