@@ -57,10 +57,10 @@ public:
 
 	enum class decoding_behavior
 	{
-		/** the input must be well padded; no bits are ignored */
-		strict,
 		/** if the input is not padded, the remaining bits are ignored */
-		moderate
+		moderate,
+		/** if a padding character is encounter decoding is finished */
+		loose
 	};
 
 	/**
@@ -229,6 +229,18 @@ public:
 			}
 
 			last = part;
+		}
+
+		// check padding
+		if (behavior != decoding_behavior::loose) {
+			while (in_begin != in_end) {
+				auto c = *in_begin;
+				++in_begin;
+
+				if (c != '=') {
+					throw base64_error("invalid base64 character.");
+				}
+			}
 		}
 
 		return out;
