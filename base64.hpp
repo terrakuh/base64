@@ -217,7 +217,7 @@ public:
 
 			// enough bits for one byte
 			if (bits + 6 >= 8) {
-				*out = (last << (8 - bits)) | (part >> bits - 2);
+				*out = (last << (8 - bits)) | (part >> (bits - 2));
 				++out;
 
 				bits -= 2;
