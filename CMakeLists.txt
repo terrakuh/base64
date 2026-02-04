@@ -14,6 +14,7 @@ target_sources(
 )
 add_library(base64::base64 ALIAS base64)
 
+options(BUILD_MAIN "Build main.cpp for testing" OFF)
 if (BUILD_MAIN)
     add_executable(main "main.cpp")
     target_link_libraries(main PRIVATE base64)
