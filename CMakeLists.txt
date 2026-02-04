@@ -12,6 +12,7 @@ target_sources(
         FILES
         base64.hpp
 )
+add_library(base64::base64 ALIAS base64)
 
 if (BUILD_MAIN)
     add_executable(main "main.cpp")
