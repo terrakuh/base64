@@ -12,6 +12,7 @@ target_sources(
         FILES
         base64.hpp
 )
+target_compile_features(base64 INTERFACE cxx_std_11)
 add_library(base64::base64 ALIAS base64)
 
 option(BUILD_MAIN "Build main.cpp for testing" OFF)
