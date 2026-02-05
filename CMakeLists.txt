@@ -21,10 +21,5 @@ if (BUILD_MAIN)
     target_link_libraries(main PRIVATE base64)
 endif ()
 
-install(TARGETS base64 EXPORT base64Targets FILE_SET public_headers DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/base64)
-install(EXPORT base64Targets NAMESPACE base64:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/base64 FILE base64Config.cmake)
-include(CMakePackageConfigHelpers)
-install(FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/base64Config.cmake"
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/base64
-)
+install(TARGETS base64 EXPORT base64Config FILE_SET public_headers DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/base64)
+install(EXPORT base64Config NAMESPACE base64:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/base64)
